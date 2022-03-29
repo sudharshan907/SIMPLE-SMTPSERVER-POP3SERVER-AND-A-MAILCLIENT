@@ -1,0 +1,81 @@
+1)Context:
+
+*I think there is nothing new in this assignment as compared to prev ass's(mentioned smtp-related to mail but in Subbu anna code he just used big char array and send(),recv() fn calls that's it.we just have to code in c language(more lines of c code using more logics that's it) more to complete this assignment.(in ass it is asked to use SMTP protocol and pop3 protocol but just used normal send(),recv() fn's for sending,viewing mails.
+
+*Mail is just a string of characters while passing from client to server here in a particular format.not a file or any other format file.(did like this,no SMTP protocol etc)
+
+*Refer all screenshots in pdf for knowing almost all cases/facilities included in 3 codes.
+
+*Must follow all setup instr's given in ass pdf for smooth run of codes(all user files should be created manually(with their name only) in server directory and mymailbox.mail file inside every user folder.)
+
+*Mentioned that i used smtp protocol and pop3 protocol inside the server codes in readme file of github(in seperate repository) but actually didnot use those protocols and just used send(),recv() fn calls appropriately that's it.
+
+2)Notepoints abt codes:-
+
+*In while loop of strtok()(anywhere inside codes) might think in token2 we will get both username and password combined but not,refer gfg for this fn speciaality.(that splitting character must be const char data type only)-while splitting any sentence.
+
+*In client and server(smtpmail.c) they are entering to send mail and recv mail fn's definitely at Same time,but client is sending only after checking in one case and if not crct format not sending to server.so might think that there will be send-recv coordination issues here.but no problem will arise bcz there is a constraint in client code that if entered incorrect format must enter again and it will stuck there until user enters correct format and server will wait till then.so no coordination issues here.
+
+*Note that mymailbox.mail file in all users directory and users folder also are created manually.(not from inside code).
+
+*Popserver only supports manage_mail option and smtpmail server only supports send_mail option.so one client code and 2 server codes are needed.in running of programs(in our laptop in terminal)at a time this client cannot communicate with both servers.only one after another that's it.
+
+*Invalid mail is actually user with that name does not exist in server directory list of users.
+
+*Fixed that popserver.c,smtpmail.c and mailclient.c are the 3 final codes.(only single cleint).That means if want to view the mails must disconnect from smtpmail.c and run again and connect to popserver.c .(if want to make dynamic connection to both based on option entered in mailcleint.c is also fine but that will be complicating the things unnecessarily,so left updating it)
+
+
+*subsequent client connections for smtpserver.c and pop3server.c  may not work properly-bcz code is not clean,better to run client only in first attempt,rerun the server again(by stopping it) if want to connect another client.
+
+*If in userlogin.txt file a new entry is added a a then during authentication it is showing incorrect usernames and passwords.?(bcz both servers are using a structure of size 3 only so can handle 3 users only,if removed one entry and added a a(or anything as 2 words) then it will work fine).
+*
+
+
+3)Doubts remained:-
+
+
+*Exact crystal clear clarity about fflush() statements somewhere in the codes is not understood.(ofcourse use of fflush() is illegal and can produce undefined behaviour)(purpose of flush()?)
+
+*Why put PF_INET in socket system call?(and in down initialising the structure variables AF_INET is only used)(in some programs out of 3 programs)
+
+*Purpose of while loop in receving msg in some cases of receving??(recv() fn inside while bracket)-normal single recv() will not work?
+
+*186,187 lines in smtpmail.c send() and recv() and 187,188 lines same order of send() and recv()  in mailclient.c   will this work?one end should be sending and one end should be receiving right at a time?(line numbers may not be same as 186, etc bcz they are changed during updation check inside the codes,somewhere there is this order).
+
+*Exact purpose of null appending at last and newline in all new msgs generation.why?know how working exactly.?
+
+*189th line in smtpmail.c why ==-10 refer gfg article for return values.(null is 10 may be related to it)(line number may be changed,not 189 may be)
+
+*check_line_format fn code snippet in mailclient.c is not understood but I have my own simple logic to check line_format written as comments in same code snippet inside code.
+
+4)Some limitations/bugs:-
+
+*any deviations from ass pdf instructions of code running cases,refer this whole .txt ,if not written anything refer comments inside codes also wherever related for info abt them.
+
+*Defined only 3 sized array so can handle only 3 usernames and passwords in userlogincred.txt file.
+
+*"Username password"-this string should be less than 59 characters ( bcz 60 is bounded in fgets fn)
+
+*In ass it is mentioned to send file/mail using  SMTP protocol but in Subbu anna codes he just used send(),recv() fn calls and retrieve shing pop3 protocol but in Subbu anna codes he just used fgets(),send(),recv() fn calls.
+
+*SMTP.c or POP.c servers can handle one client only at a time,no handling of multiple clients at a time.(but once a client disconnected from server,server will again start listening for a client).
+
+*In smtpmail.c code if client send a mail to some user who is not in the list of users in server,server process is stopping suddenly.try to handle this case and make smooth warning to client and continue the server process without stopping abruptly.(don't know whether this problem is there in updated codes-may be this problem resolved but not sure)
+
+*In ass pdf it is asked that if user enters a incorrect format mail,then client process should check and if detected incorrect ,should ask 3 options(send mail and quit) again.but in code it asks for mail again and keeps on asking mail until he enters crct format mail and sends to someone.(try to update this if required at last and there is time).(will not get out of it until process stopped using ctrl+c)
+
+*If client is connected to s.c and entered manage mail option then client code will enter into manage mail fn but s.c will enter into recv mail fn(also if connected to p.c and entered send mail sinilar situation)-resolve this smoothly.(left resolving this bcz of not time)
+
+*In ass it is asked to filter mails based on serial number(not mentioned correctly) but i followed old format of snrs ass, filtering mails by sender mail id(invalid mail id option(means if entered username who is not in list of all users),no mails to show option(if entered username exists in list of all users but no mails from him to user as of now),and last case of sending of asked sender mails only by filtering them (as a list )-but after this I am just returning/stopping the both fn's.(not smooth handling)
+
+*In p.c and c.c pair,if entered 'q' ,should return to 3 options menu but I am terminating client process and server will also get disconnected from client bcz i didn't make connection dynamic based on options entered by client(send mail,manage mail,quit).
+
+*Any facility in next iterations(not first iteration) of any loop in all 3 programs can give errors.so better to rerun whole process again for crct functionaalities.
+
+*Any facility,in some runs working fine and in some runs seg fault or some other error(especially in p.c and c.c codes run)(I think this problem is not there but may be in few runs some undefined behaviour is happening)
+
+*1 facility of p.c code,'d' (don't know how to delete mails in files and it is not specified correctly what ,how to delete etc).-This deletion facility is not coded.
+
+*In sending list of specific sender list to client,some extra unmeaningful characters are being appended at last of msg.dont know why?
+
+*In some runs of same exact codes,preview of all mails is not reaching after entering manage mail option and seg fault in server there itself.dont know why and in some runs some extra matter(string) is being appended between serial number and each mail preview for each mail in preview)

@@ -1,0 +1,16 @@
+SMTP is used to send mails from a mail client to the mail server which does
+not help in the mail retrieval process. For that, we use POP3 protocol. POP3
+downloads all the messages from the server and stores the messages locally on
+your computer or device. However, it is complicated to access email
+using POP3 on multiple devices. i.e., if you are using multiple devices, their
+mail folder will most likely be different from each other. In order to access
+your mailfolder across multiple devices synchronously, you need to use
+IMAP (Internet Message Access Protocol). 
+IMAP is a protocol your email client uses to synchronize all the messages
+between the server and your clients. i.e., when you read a message on your
+personal laptop, it will also show up as read on your work computer,
+smartphone, tablet, and other devices. With IMAP, the email is stored on the
+server. (More details of IMAP are available in RFC 1730).
+
+
+IMAP protocol is better than pop3 protocol overall.however there may be some adv's in pop3 protocol which are not in imap protocol.current gmail uses protocols which is similar to imap=very updated version of imap.(with smooth synchronisation).
